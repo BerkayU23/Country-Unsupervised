@@ -378,4 +378,3 @@ for min_cluster in min_cluster_sizes:
 
 results_hdbscan_df = pd.DataFrame(results_hdbscan).sort_values(by="Silhouette", ascending=False)
 print(results_hdbscan_df)
-print("SON KONTROL")
