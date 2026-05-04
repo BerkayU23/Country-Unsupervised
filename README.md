@@ -1,24 +1,24 @@
-# Ülkelerin Sosyo-Ekonomik Gelişmişlik Düzeylerine Göre Kümelenmesi (Unsupervised Learning)
+   # Ülkelerin Sosyo-Ekonomik Gelişmişlik Düzeylerine Göre Kümelenmesi (Unsupervised Learning)
 
-Bu proje, ülkelerin sosyo-ekonomik ve sağlık göstergelerini (çocuk ölüm oranları, ihracat, sağlık harcamaları, ithalat, gelir, enflasyon, yaşam beklentisi, doğurganlık oranı ve GSYİH) kullanarak ülkeleri benzerliklerine göre gruplandırmayı amaçlayan bir **Gözetimsiz Öğrenme (Unsupervised Learning)** çalışmasıdır.
+Bu proje, ülkelerin temel ekonomik ve sağlık göstergelerini analiz ederek, benzer özelliklere sahip ülkeleri gruplandırmak amacıyla geliştirilmiştir. Proje, özellikle yardım kuruluşları ve strateji uzmanları için bütçe önceliklendirmesi yaparken veriye dayalı bir temel sunmayı hedefler.
 
-Temel hedef, ülkelere yapılabilecek olası finansal yardımları veya bütçe desteklerini önceliklendirmek için veriye dayalı bir kümeleme (Clustering) yapmaktır.
+## 📁 Proje Yapısı
 
-## 🚀 Proje Adımları ve Metodoloji
+Proje içerisinde iki temel çalışma dosyası bulunmaktadır:
 
-1. **Keşifçi Veri Analizi (EDA):** Veri setindeki özelliklerin dağılımlarını anlamak için histogramlar ve özellikler arası ilişkileri incelemek için korelasyon ısı haritaları (heatmap) oluşturuldu.
-2. **Veri Ön İşleme (Data Preprocessing):**
-   * Metin verileri (Ülke isimleri) model eğitiminden önce veri sızıntısını (data leakage) önlemek adına dikkatlice ayrıştırıldı.
-   * Özelliklerin farklı ölçeklerde olmasının mesafeye dayalı algoritmaları yanıltmaması için `MinMaxScaler` ile normalizasyon uygulandı.
-3. **Boyut İndirgeme (Dimensionality Reduction):** Veri setinin taşıdığı varyansın %90'ından fazlasını açıklayan ilk 3 bileşen, **PCA (Principal Component Analysis)** kullanılarak elde edildi ve modellerin daha gürbüz (robust) çalışması sağlandı.
-4. **Modelleme:** Boyutları indirgenmiş ve normalleştirilmiş veri seti üzerinde aşağıdaki kümeleme algoritmaları eğitildi:
-   * **K-Means** (İdeal küme sayısı `KneeLocator` ile dirsek yöntemi kullanılarak belirlendi)
-   * **Agglomerative Hierarchical Clustering (HC)**
-   * **DBSCAN**
-   * **HDBSCAN**
-5. **Hiperparametre Optimizasyonu:** Yoğunluk tabanlı algoritmaların (DBSCAN ve HDBSCAN) tek bir dev küme üretmesini (underfitting) engellemek için `eps`, `min_samples` ve `min_cluster_size` gibi parametreler üzerinde döngüler kurularak detaylı Grid Search benzeri optimizasyonlar yapıldı.
-6. **Değerlendirme:** Modellerin başarısı **Silhouette Score** metrikleri üzerinden PCA'li ve PCA'siz durumlar için karşılaştırmalı olarak analiz edildi.
-7. **Görselleştirme:** Elde edilen en tutarlı etiketler ("Bütçe Gerekli", "Arada Kalanlar", "Bütçe Gerekli Değil"), **Plotly** kullanılarak dünya haritası (Choropleth Map) üzerinde coğrafi olarak görselleştirildi.
+*   **`Country-Unsupervised.ipynb` (Jupyter Notebook):** Projenin görsel analiz raporudur. Adım adım kodların çalıştırılmış hallerini, veri tablolarını ve interaktif harita sonuçlarını içerir. **Doğrudan inceleme için bu dosya önerilir.**
+*   **`Country Unsupervised.py` (Python Script):** Projenin otomatize edilebilir saf kod versiyonudur.
+
+## 🚀 Uygulanan Analiz Adımları
+
+1.  **Keşifçi Veri Analizi (EDA):** Korelasyon ısı haritaları ve histogramlar ile veri setindeki yapısal ilişkiler incelendi.
+2.  **Veri Ön İşleme:** `MinMaxScaler` ile normalizasyon yapılarak tüm değişkenler aynı ölçeğe getirildi. Ülke isimleri gibi kategorik veriler, model doğruluğu için işlem dışı tutuldu.
+3.  **Boyut İndirgeme (PCA):** Verinin gürültüsünü azaltmak ve performansı artırmak için **Principal Component Analysis** kullanılarak boyut 3 temel bileşene düşürüldü.
+4.  **Kümeleme Modelleri:** 
+    *   **K-Means:** `KneeLocator` ile ideal küme sayısı (dirsek noktası) belirlenerek en dengeli sonuçlar elde edildi.
+    *   **Hierarchical Clustering (Agglomerative):** Hiyerarşik yapı incelendi.
+    *   **DBSCAN & HDBSCAN:** Yoğunluk tabanlı kümeleme denemeleri yapıldı ve hiperparametre optimizasyonu (`eps`, `min_samples`) ile en yüksek Silhouette skorları hedeflendi.
+5.  **Görselleştirme:** Kümeleme sonuçları "Bütçe Gereken", "Arada Kalan" ve "Bütçe Gerekmeyen" şeklinde etiketlenerek **Plotly** üzerinden interaktif bir dünya haritasına aktarıldı.
 
 ## 🛠️ Kullanılan Teknolojiler ve Kütüphaneler
 
@@ -28,18 +28,14 @@ Temel hedef, ülkelere yapılabilecek olası finansal yardımları veya bütçe 
 * **Yardımcı Araçlar:** kneed (Elbow noktası tespiti)
 * **Görselleştirme:** Matplotlib, Seaborn, Plotly Express
 
-## 📊 Öne Çıkan Sonuçlar
+## 📊 Önemli Bulgular ve Sonuçlar
 
-* PCA uygulamanın, bu veri seti özelinde tüm kümeleme algoritmalarının Silhouette skorlarını belirgin şekilde artırdığı gözlemlenmiştir.
-* Yoğunluk tabanlı algoritmalar (DBSCAN/HDBSCAN) veri setinin yapısı gereği tek bir büyük küme eğilimi gösterirken, merkez tabanlı **K-Means algoritması** veriyi 3 mantıklı sınıfa bölerek (Silhouette Score: ~0.438) ekonomik gerçekliklerle örtüşen en dengeli sonuçları üretmiştir.
+*   **PCA Etkisi:** Boyut indirgeme işlemi, K-Means ve HC gibi mesafe tabanlı algoritmaların Silhouette skorlarını belirgin şekilde iyileştirmiştir.
+*   **Algoritma Karşılaştırması:** DBSCAN yoğunluk farklarından dolayı tek bir dev küme üretme eğilimi gösterirken, **K-Means (k=3)** veriyi ekonomik gerçekliklerle en uyumlu şekilde gruplandıran model olmuştur (Silhouette Score: ~0.438).
 
-## 💻 Kurulum ve Kullanım
+## 🛠️ Kurulum
 
-Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
-
-1. Depoyu klonlayın:
-   ```bash
-   git clone [https://github.com/KULLANICI_ADINIZ/country-clustering.git](https://github.com/KULLANICI_ADINIZ/country-clustering.git)
-
-   pip install pandas numpy scikit-learn seaborn matplotlib plotly kneed hdbscan
-   
+```bash
+git clone [https://github.com/BerkayU23/Country-Unsupervised.git](https://github.com/BerkayU23/Country-Unsupervised.git)
+cd Country-Unsupervised
+pip install pandas numpy scikit-learn seaborn matplotlib plotly kneed hdbscan
