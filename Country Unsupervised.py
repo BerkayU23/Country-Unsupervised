@@ -70,7 +70,6 @@ plt.ylabel("Variance Covered")
 plt.title("Variance Covered")
 plt.show()
 
-
 # aslında kümülatif gitmesi yani toplayarak girmesi gerekiyor bunun için plt.step(adım, işlem) np.cumsum ekleriz
 
 plt.step(list(range(1,10)), np.cumsum(pca.explained_variance_ratio_))
@@ -78,7 +77,6 @@ plt.plot(np.cumsum(pca.explained_variance_ratio_))
 plt.ylabel("Variance Covared")
 plt.title("Variance Covered")
 plt.show()
-
 
 # 3 de neredeyse verinin yüzde 90'ını alıyoruz yani pca yi 3 kolon olarak alabiliriz 
 
@@ -103,7 +101,7 @@ plt.xticks(range(1,11))
 plt.xlabel("Number of Clusters")
 plt.ylabel("WCSS")
 plt.show()
-   
+
 # bu grafik ile çokta anlamlı bir çıkarım elde edemedik 
 
 model = KMeans(n_clusters=3, random_state=23)
@@ -222,7 +220,7 @@ for eps in eps_values:
 results_df = pd.DataFrame(results).sort_values(by="Silhouette", ascending=False)
 print(results_df)
 
-# ... HDBSCAN Kodu başlangıcı ...
+
 from sklearn.cluster import HDBSCAN
 
 min_cluster_sizes = [3, 5, 7, 10]
@@ -348,7 +346,7 @@ for eps in eps_values:
 results_df = pd.DataFrame(results).sort_values(by="Silhouette", ascending=False)
 print(results_df)
 
-# ... HDBSCAN Kodu başlangıcı ...
+
 from sklearn.cluster import HDBSCAN
 
 min_cluster_sizes = [3, 5, 7, 10]
