@@ -18,7 +18,7 @@ Proje içerisinde iki temel çalışma dosyası bulunmaktadır:
     *   **K-Means:** `KneeLocator` ile ideal küme sayısı (dirsek noktası) belirlenerek en dengeli sonuçlar elde edildi.
     *   **Hierarchical Clustering (Agglomerative):** Hiyerarşik yapı incelendi.
     *   **DBSCAN & HDBSCAN:** Yoğunluk tabanlı kümeleme denemeleri yapıldı ve hiperparametre optimizasyonu (`eps`, `min_samples`) ile en yüksek Silhouette skorları hedeflendi.
-5.  **Görselleştirme:** Kümeleme sonuçları "Bütçe Gereken", "Arada Kalan" ve "Bütçe Gerekmeyen" şeklinde etiketlenerek **Plotly** üzerinden interaktif bir dünya haritasına aktarıldı.
+5.  **Görselleştirme:** Kümeleme sonuçları "Bütçe Gereken", "Arada Kalan" ve "Bütçe Gerekmeyen" şeklinde etiketlenerek **Plotly** üzerinden interaktif bir dünya haritasına (map.png) aktarıldı.
 
 ## 🛠️ Kullanılan Teknolojiler ve Kütüphaneler
 
